@@ -1,0 +1,29 @@
+{% extends "cbvapp/base.html" %}
+
+{% block body %}
+<br>
+<div class="container">
+    <h1 class="d-flex justify-content-center mb-4">Company List</h1> <br><br>
+    <div class=" d-flex justify-content-evenly">
+        {% for company in allcompanies %}
+            <div class="card" style="width: 18rem;">
+                {% if company.logo %}
+                    <img src="{{ company.logo.url }}" class="card-img-top" alt="...">
+                {% else %}
+                    <p>No photo</p>
+                {% endif %}
+
+                <div class="card-body ">
+                  <h5 class="card-title">{{ company.name }}</h5>
+                  <p class="card-text"><strong class="text-muted" >CEO : {{ company.ceo }}</strong><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                  <a href="{% url 'detail' company.id %}" class="btn btn-primary btn-sm">More Information</a>
+                </div>
+              </div>
+        {% empty %}
+            <li>No companies found.</li>
+        {% endfor %}
+    </div>
+</div>
+{% endblock  %}
+
+

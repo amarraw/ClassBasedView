@@ -1,0 +1,27 @@
+{% extends "cbvapp/base.html" %}
+
+{% block body %}
+<br>
+
+{% if not form.instance.pk  %}
+    <div class="container mt-4 d-flex flex-column align-items-center justify-content-center">
+        <h2 class="alert alert-info">Add New Comapany</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Comapany" class="btn btn-success btn-sm">
+        </form>
+    </div>
+{% else %}
+    <div class="container mt-4 d-flex flex-column align-items-center justify-content-center">
+        <h2 class="alert alert-info">Update Comapany</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Comapany" class="btn btn-success btn-sm">
+        </form>
+    </div>
+{% endif %}
+    
+{% endblock  %}
+    

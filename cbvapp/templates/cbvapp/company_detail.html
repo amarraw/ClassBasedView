@@ -1,0 +1,46 @@
+{% extends "cbvapp/base.html" %}
+
+{% block body %}
+<div class="container d-flex justify-content-center flex-column align-items-center mt-4">
+    <div class="card-body">
+        <h1>{{ company_details.name }} Company details </h1> 
+        <a href="{% url 'addproduct' %}" class="btn btn-info btn-sm" >Add product</a> <br>
+        <strong>CEO:</strong> {{ company_details.ceo }} <br>
+        <strong>Started:</strong> {{ company_details.started }} <br>
+        <strong>Origin:</strong> {{ company_details.origin }} <br>
+        <a href="{% url 'update' pk=company_details.pk %}" class="btn btn-success btn-sm">Update</a>
+        <a href="{% url 'delete' pk=company_details.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+    <h2 class="mt-5  alert alert-info"><strong>CARS BY :</strong> {{ company_details.name }}</h2>
+</div>
+
+
+<br><br>
+
+<div class="d-flex justify-content-evenly mb-4">
+    {% if company_details.companies.all %}
+        {% for car in company_details.companies.all %}
+            {% if car.cars_img  %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ car.cars_img.url }}" class="card-img-top" alt="...">
+            {% else %}
+                <p>No photo</p>
+            {% endif %}
+                <div class="card-body">
+                    <p class="card-text"><strong>Car Name:</strong> {{ car.car_name }} <br>
+                    <strong>Milliege:</strong> {{ car.milliege }} <br>
+                    <strong>Fuel Type:</strong> {{ car.fuel_type }} <br>
+                    <strong>Seat Capacity:</strong> {{ car.seat_capicity }} <br>
+                    <strong>Rooftop:</strong>{% if car.is_rooftoop %} Yes {% else %}No {% endif %} <br>
+                    <a href="{% url 'updatecar' pk=car.pk %}"><i class='bx bxs-edit'></i></a>
+                    <a href="{% url 'deletepro' pk=car.pk %}"><i class='bx bx-trash' ></i></a>
+                    </p>
+                </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock  %}
+    
